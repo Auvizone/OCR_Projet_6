@@ -13,10 +13,25 @@
     </header>
     <main id="main">
       <div class="photograph-header">
-        <div class="photographer_section"></div>
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <div class="photographer_section" id="photo_section">
+          <div class="infos">
+            <div id="name">name</div>
+            <div id="location">location</div>
+            <div id="tag">tag</div>
+          </div>
+          <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+          <img id="photo"></img>
+        </div>
       </div>
     </main>
+    <section class="photos">
+      <p>Trier par</p>
+      <select>
+        <option value="Popularité">Popularité</option>
+        <option value="Date">Date</option>
+        <option value="Titre">Titre</option>
+      </select>
+    </section>
     <div id="contact_modal">
 			<div class="modal">
 				<header>

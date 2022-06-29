@@ -12,7 +12,6 @@ async function getPhotographer(id) {
 
 function findId(photographers, id) {
     var data = photographers.photographers;
-    console.log(data)
     for (var i = 0; i < data.length; i++) {
         if (data[i].id == id) {
             photographer = data[i]
@@ -21,11 +20,20 @@ function findId(photographers, id) {
 }
 
 async function displayData(data) {
-    const photographersSection = document.querySelector(".photographer_section");
-        const photographerModel = photographerFactory(data);
-        const userCardDOM = photographerModel.getUserCardDOM();
-        photographersSection.appendChild(userCardDOM);
-};
+    console.log('data', data)
+    const picture = `assets/photographers/${data.portrait}`;
+    document.getElementById('name').innerHTML = data.name;
+    document.getElementById('location').innerHTML = data.city + ',' + ' ' + data.country
+    document.getElementById('tag').innerHTML = data.tagline;
+    document.getElementById('photo').setAttribute('src', picture)
+}
+
+// async function displayData(data) {
+//     const photographersSection = document.querySelector(".photographer_section");
+//         const photographerModel = photographerFactory(data);
+//         const userCardDOM = photographerModel.getUserCardDOM();
+//         photographersSection.appendChild(userCardDOM);
+// };
 
 async function init() {
     const photographer = await getPhotographer(id);

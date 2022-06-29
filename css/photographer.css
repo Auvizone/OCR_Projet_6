@@ -28,7 +28,7 @@ p {
 
 .photographer_section {
     height: 100%;
-    width: 50%;
+    width: 100%;
 }
 
 .photographer_section article h2 {
@@ -121,15 +121,63 @@ form input {
     border-radius: 5px;
 }
 
-.photographer {
+/* .photographer {
     display: flex;
     flex-direction: column;
     height: 100%;
     border: 2px solid red;
+    width:50%;
 }
 
 .photographer > img {
     position: absolute;
     right: 10%;
+    border: 2px solid blue; 
+} */
+
+.photographer_section article {
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    flex-direction: column;
+}
+
+.location {
+    color: red;
+    font-size: 20px;
+    margin: 0;
+}
+
+.tag {
+    color: black;
+}
+
+.priceTag {
+    display: none;
+}
+
+#photo_section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     border: 2px solid blue;
+    align-content: center;
+}
+
+.contact_button {
+    margin: auto 0;
+}
+
+.infos {
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    flex-direction: column;
+    height: 100%;
+}
+
+#photo {
+    margin: auto 0;
 }
