@@ -19,6 +19,10 @@ h1 {
     margin-right: 100px;
 }
 
+p {
+    margin: 0;
+}
+
 .logo {
     height: 50px;
     margin-left: 100px;
@@ -42,9 +46,26 @@ h1 {
 .photographer_section article h2 {
     color: #D3573C;
     font-size: 36px;
+    margin: 15px 0 10px 0;
 }
 
 .photographer_section article img {
-    height: 200px;
-    width: 200px;
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+    border-radius: 200px;
+}
+
+.location {
+    color: red;
+    font-size: 20px;
+    margin: 0;
+}
+
+.tag {
+    color: black;
+}
+
+.priceTag {
+    color: gray;
 }
