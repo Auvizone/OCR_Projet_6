@@ -31,13 +31,13 @@ p {
     width: 100%;
 }
 
-.photographer_section article h2 {
+.photographer_section div h2 {
     color: #D3573C;
     font-size: 36px;
     margin: 15px 0 10px 0;
 }
 
-.photographer_section article img {
+.photographer_section div img {
     height: 300px;
     width: 300px;
     object-fit: cover;
@@ -180,4 +180,32 @@ form input {
 
 #photo {
     margin: auto 0;
+}
+
+#location {
+    color: red;
+    font-size: 20px;
+    margin: 0;
+  }
+
+.photos {
+    width: 100%;
+    border: 2px solid green;
+    margin: 0 100px;
+}
+
+.tri {
+    display: flex;
+    flex-direction: row;
+}
+
+.select {
+    background-color: #901C1C;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.select * {
+    padding: 150px;
 }
