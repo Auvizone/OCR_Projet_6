@@ -4,8 +4,6 @@
         const response = await fetch('../../data/photographers.json');
         const photographers = await response.json();
 
-        console.log(photographers)
-
         // et bien retourner le tableau photographers seulement une fois
         return (photographers)
     }

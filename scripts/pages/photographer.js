@@ -2,6 +2,7 @@
 let params = (new URL(document.location)).searchParams;
 let id = params.get('id');
 let photographer = '';
+let photographerPictures = [];
 
 async function getPhotographer(id) {
     const response = await fetch('../../data/photographers.json');
@@ -19,8 +20,35 @@ function findId(photographers, id) {
     }
 }
 
+async function getPictures(data, name) {
+    const response = await fetch(`../../data/photographers.json`)
+    const pictures = await response.json();
+    sortPictures(pictures.media, name)
+    return(response)
+}
+
+async function sortPictures(data, name) {
+    console.log(data)
+    console.log(id)
+
+    const pictureSection = document.getElementById('picture-box');
+    data.forEach(element => {
+        if (element.photographerId == id) {
+            const photographPictures = photographerPageFactory(element, name)
+            const userCardDom = photographPictures.getUserCardDOMPictures();
+            pictureSection.appendChild(userCardDom)
+        } else {
+            return;
+        }
+    });
+
+}
+
 async function displayData(data) {
-    console.log('data', data)
+    console.log(data)
+    getPictures(data, data.name)
+    
+
     const picture = `assets/photographers/${data.portrait}`;
     document.getElementById('name').innerHTML = data.name;
     document.getElementById('location').innerHTML = data.city + ',' + ' ' + data.country

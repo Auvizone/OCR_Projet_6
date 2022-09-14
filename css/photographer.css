@@ -178,8 +178,25 @@ form input {
     height: 100%;
 }
 
+#picture-box {
+    border: 2px solid yellow;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.picture {
+    height: 400px;
+    width: 400px;
+    object-fit: cover;
+}
+
 #photo {
     margin: auto 0;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 100%;
 }
 
 #location {
@@ -189,9 +206,12 @@ form input {
   }
 
 .photos {
-    width: 100%;
     border: 2px solid green;
     margin: 0 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .tri {

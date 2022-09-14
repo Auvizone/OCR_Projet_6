@@ -9,7 +9,9 @@
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="http://127.0.0.1:5500/">
+        <img src="assets/images/logo.png" class="logo">
+      </a>
     </header>
     <main id="main">
       <div class="photograph-header">
@@ -24,7 +26,7 @@
         </div>
       </div>
     </main>
-    <section class="photos">
+    <div class="tri">
       <div class="tri">
         <p>Trier par</p>
         <select class="select">
@@ -33,6 +35,8 @@
           <option class="option" value="Titre">Titre</option>
         </select>
       </div>
+    </div>
+    <section class="photos" id="picture-box">
     </section>
     <div id="contact_modal">
 			<div class="modal">
@@ -43,12 +47,13 @@
 				<form>
 					<div>
 						<label>Prénom</label>
-						<input />
+						<input/>
 					</div>
           <button class="contact_button">Envoyer</button>
 				</form>
 			</div>
 		</div>
+    <script src="scripts/factories/Photographer-page.js"></script>
     <script src="scripts/factories/Photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
     <script src="scripts/pages/photographer.js"></script>
