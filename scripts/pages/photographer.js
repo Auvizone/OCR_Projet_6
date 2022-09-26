@@ -3,11 +3,15 @@ let params = (new URL(document.location)).searchParams;
 let id = params.get('id');
 let photographer = '';
 let photographerPictures = [];
+let totalLikes = 0;
+let photographerName = ''
 
 async function getPhotographer(id) {
     const response = await fetch('../../data/photographers.json');
     const photographers = await response.json();
     findId(photographers, id);
+    console.log(photographer)
+    photographerName = photographer.name;
     return(photographer)
 }
 
@@ -20,6 +24,16 @@ function findId(photographers, id) {
     }
 }
 
+function openModale(data) {
+    document.querySelector('.modal-background').style.display="flex";
+    const link = `assets/images/Sample Photos/${photographerName}/${data.image}`
+    document.getElementById('selectedImage').setAttribute('src', link)
+}
+
+function closeModale() {
+    document.querySelector('.modal-background').style.display="none";
+}
+
 async function getPictures(data, name) {
     const response = await fetch(`../../data/photographers.json`)
     const pictures = await response.json();
@@ -28,12 +42,10 @@ async function getPictures(data, name) {
 }
 
 async function sortPictures(data, name) {
-    console.log(data)
-    console.log(id)
-
     const pictureSection = document.getElementById('picture-box');
     data.forEach(element => {
         if (element.photographerId == id) {
+            totalLikes = (totalLikes + element.likes)
             const photographPictures = photographerPageFactory(element, name)
             const userCardDom = photographPictures.getUserCardDOMPictures();
             pictureSection.appendChild(userCardDom)
@@ -41,14 +53,12 @@ async function sortPictures(data, name) {
             return;
         }
     });
-
 }
 
 async function displayData(data) {
     console.log(data)
     getPictures(data, data.name)
     
-
     const picture = `assets/photographers/${data.portrait}`;
     document.getElementById('name').innerHTML = data.name;
     document.getElementById('location').innerHTML = data.city + ',' + ' ' + data.country
@@ -66,6 +76,7 @@ async function displayData(data) {
 async function init() {
     const photographer = await getPhotographer(id);
     displayData(photographer);
+    document.getElementById('close-modal').addEventListener('click', closeModale);
 }
 
 init();

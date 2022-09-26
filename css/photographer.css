@@ -205,6 +205,36 @@ form input {
     margin: 0;
   }
 
+.modal-background {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(55, 56, 59, 0.4);
+}
+
+.modal-box {
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+#close-modal {
+    position: fixed;
+    right: 15px;
+    top: 15px;
+    background-color: red;
+}
+
+#selectedImage {
+    height: 100%;
+}
+
 .photos {
     border: 2px solid green;
     margin: 0 100px;
