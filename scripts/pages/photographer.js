@@ -4,7 +4,8 @@ let id = params.get('id');
 let photographer = '';
 let photographerPictures = [];
 let totalLikes = 0;
-let photographerName = ''
+let photographerName = '';
+let photographerPrice = 0;
 
 async function getPhotographer(id) {
     const response = await fetch('../../data/photographers.json');
@@ -12,6 +13,7 @@ async function getPhotographer(id) {
     findId(photographers, id);
     console.log(photographer)
     photographerName = photographer.name;
+    photographerPrice = photographer.price;
     return(photographer)
 }
 
@@ -48,10 +50,12 @@ async function sortPictures(data, name) {
             totalLikes = (totalLikes + element.likes)
             const photographPictures = photographerPageFactory(element, name)
             const userCardDom = photographPictures.getUserCardDOMPictures();
+            
             pictureSection.appendChild(userCardDom)
         } else {
             return;
         }
+        document.querySelector('.text-info').textContent = `${totalLikes} <3 // ${photographerPrice} € /h`
     });
 }
 

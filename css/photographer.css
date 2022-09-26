@@ -44,10 +44,6 @@ p {
     border-radius: 200px;
 }
 
-#contact_modal {
-    display: none;
-}
-
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
@@ -65,6 +61,24 @@ p {
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.infos-photographe {
+    position: fixed;
+    bottom: 0;
+    right: 150px;
+    width: 300px;
+    height: 70px;
+    background-color: #D3573C;
+    color: white;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.text-info {
+    margin: auto;
 }
 
 .modal {
@@ -204,6 +218,17 @@ form input {
     font-size: 20px;
     margin: 0;
   }
+
+  #contact_modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(55, 56, 59, 0.4);
+}
 
 .modal-background {
     display: none;
