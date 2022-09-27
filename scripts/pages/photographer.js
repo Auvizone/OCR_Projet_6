@@ -55,7 +55,10 @@ async function sortPictures(data, name) {
         } else {
             return;
         }
-        document.querySelector('.text-info').textContent = `${totalLikes} <3 // ${photographerPrice} € /h`
+        // document.querySelector('.text-info').textContent = `${totalLikes} <i class="fa-solid fa-heart"></i> // ${photographerPrice} € /h`
+        document.querySelector('.text-info').innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i>`
+        document.querySelector('.text-price').innerHTML = `${photographerPrice}€ / jour`
+        document.getElementById('photographer-name').innerHTML = `${photographerName}`;
     });
 }
 

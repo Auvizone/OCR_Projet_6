@@ -33,7 +33,7 @@ p {
 
 .photographer_section div h2 {
     color: #D3573C;
-    font-size: 36px;
+    font-size: 50px;
     margin: 15px 0 10px 0;
 }
 
@@ -66,25 +66,35 @@ p {
 .infos-photographe {
     position: fixed;
     bottom: 0;
-    right: 150px;
+    right: 25px;
     width: 300px;
-    height: 70px;
+    height: 50px;
     background-color: #D3573C;
     color: white;
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     display: flex;
     justify-content: center;
 }
 
-.text-info {
+.bottom-picture {
+    color: #901C1C;
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+}
+
+.text-info, .text-price {
     margin: auto;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .modal {
     border-radius: 5px;
     background-color: #DB8876;
-    width: 50%;
+    width: 30%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -103,7 +113,7 @@ p {
 }
 
 .modal header h2 {
-    font-size: 64px;
+    font-size: 50px;
     font-weight: normal;
     text-align: center;
 }
@@ -117,7 +127,7 @@ form {
 
 form label {
     color: #312E2E;
-    font-size: 36px;
+    font-size: 40px;
 }
 
 form div {
@@ -130,7 +140,7 @@ form div {
 
 form input {
     width: 100%;
-    height: 68px;
+    height: 50px;
     border: none;
     border-radius: 5px;
 }
@@ -175,7 +185,6 @@ form input {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    border: 2px solid blue;
     align-content: center;
 }
 
@@ -193,16 +202,27 @@ form input {
 }
 
 #picture-box {
-    border: 2px solid yellow;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
+.picture-box {
+    margin-bottom: 20px;
+    width: 30%;
+}
+
 .picture {
-    height: 400px;
-    width: 400px;
-    object-fit: cover;
+    height: 30vw;
+    width: 100%;
+    object-fit:cover;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.textarea {
+    width: 100%;
+    height: 150px;
 }
 
 #photo {
@@ -225,7 +245,7 @@ form input {
     z-index: 10;
     left: 0;
     top: 0;
-    height: 100%;
+    height: 80%;
     width: 100%;
     background-color: rgba(55, 56, 59, 0.4);
 }
@@ -238,12 +258,12 @@ form input {
     top: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(55, 56, 59, 0.4);
+    background-color: white;
 }
 
 .modal-box {
     width: 80%;
-    height: 80%;
+    height: 90%;
     margin: auto;
     display: flex;
     justify-content: center;
@@ -261,7 +281,6 @@ form input {
 }
 
 .photos {
-    border: 2px solid green;
     margin: 0 100px;
     display: flex;
     flex-direction: column;
@@ -272,6 +291,10 @@ form input {
 .tri {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0px 50px 100px;
+    width: 10%;
 }
 
 .select {
