@@ -31,7 +31,9 @@ function findId(photographers, id) {
 
 function openModale(data) {
     document.querySelector('.modal-background').style.display="flex";
-    const link = `assets/images/Sample Photos/${photographerName}/${photographsArray[data.position].image}`
+    x = data.position;
+    console.log('x', x)
+    const link = `assets/images/Sample Photos/${photographerName}/${photographsArray[x].image}`
     document.getElementById('selectedImage').setAttribute('src', link)
 }
 
