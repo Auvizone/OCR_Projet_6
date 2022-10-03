@@ -3,7 +3,7 @@ function photographerPageFactory(data, photographerName) {
     
     const pictureLink = `assets/images/Sample Photos/${photographerName}/${data.image}`;
     const videoLink = `assets/images/Sample Photos/${photographerName}/${data.video}`;
-
+    
     function getUserCardDOMPictures() {
         let content;
         const article = document.createElement('article');

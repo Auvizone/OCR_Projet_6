@@ -6,6 +6,9 @@ let photographerPictures = [];
 let totalLikes = 0;
 let photographerName = '';
 let photographerPrice = 0;
+let testArray = ['premier', 'deuxieme', 'troisieme', 'quatrième'];
+let photographsArray = [];
+let x = 1;
 
 async function getPhotographer(id) {
     const response = await fetch('../../data/photographers.json');
@@ -28,7 +31,7 @@ function findId(photographers, id) {
 
 function openModale(data) {
     document.querySelector('.modal-background').style.display="flex";
-    const link = `assets/images/Sample Photos/${photographerName}/${data.image}`
+    const link = `assets/images/Sample Photos/${photographerName}/${photographsArray[data.position].image}`
     document.getElementById('selectedImage').setAttribute('src', link)
 }
 
@@ -44,13 +47,17 @@ async function getPictures(data, name) {
 }
 
 async function sortPictures(data, name) {
+    let pos = 0
     const pictureSection = document.getElementById('picture-box');
     data.forEach(element => {
         if (element.photographerId == id) {
             totalLikes = (totalLikes + element.likes)
+            element.position = pos;
+            pos++;
             const photographPictures = photographerPageFactory(element, name)
-            const userCardDom = photographPictures.getUserCardDOMPictures();
+            photographsArray.push(element)
             
+            const userCardDom = photographPictures.getUserCardDOMPictures();
             pictureSection.appendChild(userCardDom)
         } else {
             return;
@@ -84,6 +91,30 @@ async function init() {
     const photographer = await getPhotographer(id);
     displayData(photographer);
     document.getElementById('close-modal').addEventListener('click', closeModale);
+    document.getElementById('next').addEventListener('click', nextArray)
+    document.getElementById('prev').addEventListener('click', previousArray)
+
+}
+
+function nextArray() {
+    if (x == photographsArray.length) {
+        console.log('trop loin')
+    }
+    if ( x < (photographsArray.length - 1)) {
+        x = x + 1;
+        const link = `assets/images/Sample Photos/${photographerName}/${photographsArray[x].image}`
+    document.getElementById('selectedImage').setAttribute('src', link)
+        console.log(photographsArray[x])
+    } 
+}
+
+function previousArray() {
+    if (x == 0 ) {
+    } else {
+        x = x - 1;
+        const link = `assets/images/Sample Photos/${photographerName}/${photographsArray[x].image}`
+    document.getElementById('selectedImage').setAttribute('src', link)
+    }
 }
 
 init();
