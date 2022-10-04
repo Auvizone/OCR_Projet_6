@@ -11,6 +11,7 @@ function photographerPageFactory(data, photographerName) {
         if(data.image !== undefined) {
             const img = document.createElement('img');
             img.setAttribute('src', pictureLink)
+            img.setAttribute('alt', data.title)
             img.classList.add('picture')
             img.addEventListener('click', function passData() {
                 openModale(data)
@@ -19,6 +20,7 @@ function photographerPageFactory(data, photographerName) {
         } if(data.video !== undefined) {
             const video = document.createElement('video');
             video.classList.add('picture')
+            video.setAttribute('alt', data.title)
             video.setAttribute('controls', true)
             const source = document.createElement('source')
             source.setAttribute('src', videoLink)

@@ -6,7 +6,6 @@ let photographerPictures = [];
 let totalLikes = 0;
 let photographerName = '';
 let photographerPrice = 0;
-let testArray = ['premier', 'deuxieme', 'troisieme', 'quatrième'];
 let photographsArray = [];
 let x = 1;
 
@@ -80,6 +79,7 @@ async function displayData(data) {
     document.getElementById('location').innerHTML = data.city + ',' + ' ' + data.country
     document.getElementById('tag').innerHTML = data.tagline;
     document.getElementById('photo').setAttribute('src', picture)
+    document.getElementById('photo').setAttribute('alt', photographerName)
 }
 
 // async function displayData(data) {
