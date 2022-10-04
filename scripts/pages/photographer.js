@@ -40,16 +40,18 @@ function closeModale() {
     document.querySelector('.modal-background').style.display="none";
 }
 
-async function getPictures(data, name) {
+async function getAllPictures(data, name) {
     const response = await fetch(`../../data/photographers.json`)
     const pictures = await response.json();
-    sortPictures(pictures.media, name)
+    getPhotographerPictures(pictures.media, name)
     return(response)
 }
 
-async function sortPictures(data, name) {
+async function getPhotographerPictures(data, name) {
     let pos = 0
     const pictureSection = document.getElementById('picture-box');
+    sortPicturesDate(data)
+    console.log(data)
     data.forEach(element => {
         if (element.photographerId == id) {
             totalLikes = (totalLikes + element.likes)
@@ -70,9 +72,51 @@ async function sortPictures(data, name) {
     });
 }
 
+function sortPictures(data) {
+    data.sort(function (a,b) {
+        if (a.title < b.title) {
+            return -1;
+        }
+        if (a.title > b.title) {
+            return 1;
+        }
+        return 0;
+    })
+    return data;
+}
+
+function sortPicturesLikes(data) {
+    data.sort(function (a,b) {
+        return b.likes - a.likes
+    })
+}
+
+function sortPicturesDate(data) {
+    data.sort(function (a,b) {
+        return new Date(b.date) - new Date(a.date)
+    })
+}
+
+function addLikes(data) {
+    if(data.updated == true) {
+        data.likes--;
+        totalLikes--;
+        document.getElementById(`${data.id}`).innerHTML = data.likes + ' ' + `<i class="fa-regular fa-heart"></i>`;
+        data.updated = false;
+        document.querySelector('.text-info').innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i>`
+    } else if(data.updated != true) {
+        data.likes++;
+        totalLikes++;
+        document.getElementById(`${data.id}`).innerHTML = data.likes + ' ' + `<i class="fa-solid fa-heart"></i>`;
+        data.updated = true;
+        document.querySelector('.text-info').innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i>`
+    }
+
+}
+
 async function displayData(data) {
     console.log(data)
-    getPictures(data, data.name)
+    getAllPictures(data, data.name)
     
     const picture = `assets/photographers/${data.portrait}`;
     document.getElementById('name').innerHTML = data.name;
@@ -81,13 +125,6 @@ async function displayData(data) {
     document.getElementById('photo').setAttribute('src', picture)
     document.getElementById('photo').setAttribute('alt', photographerName)
 }
-
-// async function displayData(data) {
-//     const photographersSection = document.querySelector(".photographer_section");
-//         const photographerModel = photographerFactory(data);
-//         const userCardDOM = photographerModel.getUserCardDOM();
-//         photographersSection.appendChild(userCardDOM);
-// };
 
 async function init() {
     const photographer = await getPhotographer(id);

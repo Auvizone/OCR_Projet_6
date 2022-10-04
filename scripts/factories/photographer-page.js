@@ -1,6 +1,5 @@
 function photographerPageFactory(data, photographerName) {
-    const { name, portrait, city, country, price, tagline, id } = data;
-    
+    const { name, portrait, city, country, price, date, tagline, id } = data;
     const pictureLink = `assets/images/Sample Photos/${photographerName}/${data.image}`;
     const videoLink = `assets/images/Sample Photos/${photographerName}/${data.video}`;
     
@@ -42,9 +41,13 @@ function photographerPageFactory(data, photographerName) {
         divLike.classList.add('like-box');
         
         const likes = document.createElement('p');
+        likes.setAttribute('id', data.id)
         div.classList.add('likes');
-        likes.innerHTML = data.likes + ' ' + `<i class="fa-solid fa-heart"></i>`;
-        
+        likes.innerHTML = data.likes + ' ' + `<i class="fa-regular fa-heart"></i>`;
+        likes.addEventListener('click', function passLikes() {
+            addLikes(data)
+        })
+
         divLike.appendChild(likes);
         div.appendChild(title)
         div.appendChild(divLike)
@@ -52,5 +55,5 @@ function photographerPageFactory(data, photographerName) {
         article.appendChild(div)
         return (article);
     }
-    return { name, portrait, city, country, price, tagline, id, getUserCardDOMPictures }
+    return { name, portrait, city, country, price, date, tagline, id, getUserCardDOMPictures }
 }

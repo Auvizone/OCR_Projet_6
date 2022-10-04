@@ -91,6 +91,10 @@ p {
     font-weight: bold;
 }
 
+.like-box {
+    cursor: pointer;
+}
+
 .modal {
     border-radius: 5px;
     background-color: #DB8876;
@@ -314,7 +318,7 @@ form input {
 }
 
 .photos {
-    margin: 0 100px;
+    margin: 0 100px 50px 100px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
