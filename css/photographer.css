@@ -21,6 +21,10 @@ p {
     margin: 0;
 }
 
+:focus {
+    outline: 3px solid red;
+}
+
 .logo {
     height: 50px;
     margin-left: 100px;

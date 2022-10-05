@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <link href="css/photographer.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
@@ -25,24 +25,24 @@
           <img id="photo"></img>
         </div>
       </div>
-    </main>
+    </main aria-hidden="true">
       <div class="tri">
-        <p>Trier par</p>
-        <select class="select">
-          <option class="option" value="Popularité">Popularité</option>
-          <option class="option" value="Date">Date</option>
-          <option class="option" value="Titre">Titre</option>
+        <label for="select">Trier par</label>
+        <select id="select" class="select">
+          <option id="option-popularite" class="option" value="Popularité">Popularité</option>
+          <option id="option-date" class="option" value="Date">Date</option>
+          <option id="option-titre" class="option" value="Titre">Titre</option>
         </select>
       </div>
     <section class="photos" id="picture-box">
     </section>
-    <div class="modal-background">
+    <div id="lightbox" class="modal-background" aria-hidden="true" role="dialog">
       <div class="navigation">
-        <div id="prev" class="prev nav-btn"><</div>
-        <div id="next" class="next nav-btn">></div>
+        <button id="prev" class="prev nav-btn"><</button>
+        <button id="next" class="next nav-btn">></button>
       </div>
 
-      <p id="close-modal">close</p>
+      <button id="close-modal">close</button>
       <div class="modal-box">
         <img id="selectedImage">
       </div>
@@ -56,23 +56,23 @@
         </header>
 				<form>
 					<div>
-						<label class="label">Prénom</label>
-						<input/>
+						<label for="prenom" class="label">Prénom</label>
+						<input id="prenom"/>
 					</div>
           <div>
-						<label class="label">Nom</label>
-						<input/>
+						<label for="nom" class="label">Nom</label>
+						<input id="nom"/>
 					</div>
           <div>
-						<label class="label">Email</label>
-						<input/>
+						<label for="email" class="label">Email</label>
+						<input id="email"/>
 					</div>
           <div >
-						<label class="label">Votre message</label>
-						<input class="textarea"/>
+						<label for="message" class="label">Votre message</label>
+						<input id="message" class="textarea"/>
 					</div>
-          <button class="contact_button">Envoyer</button>
 				</form>
+        <button id="contact-button" class="contact_button">Envoyer</button>
 			</div>
 		</div>
     <div class="infos-photographe">

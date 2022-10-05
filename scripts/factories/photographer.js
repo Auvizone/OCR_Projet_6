@@ -7,8 +7,11 @@ function photographerFactory(data) {
     function getUserCardDOM() {
         const article = document.createElement( 'article' );
         article.classList.add('photographer')
+        const a = document.createElement('a');
+        a.setAttribute('href', `http://127.0.0.1:5500/photographer.html?id=${id}`)
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture)
+        a.appendChild(img)
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
         const location = document.createElement('p');
@@ -20,14 +23,14 @@ function photographerFactory(data) {
         const priceTag = document.createElement('p');
         priceTag.textContent = price + '€/jour';
         priceTag.classList.add('priceTag')
-        article.appendChild(img);
+        article.appendChild(a);
         article.appendChild(h2);
         article.appendChild(location)
         article.appendChild(tag)
         article.appendChild(priceTag)
-        article.addEventListener('click', () => {
-            window.location.href = `http://127.0.0.1:5500/photographer.html?id=${id}`
-        })
+        // article.addEventListener('click', () => {
+        //     window.location.href = `http://127.0.0.1:5500/photographer.html?id=${id}`
+        // })
         return (article);
     }
     return { name, picture, city, price, tagline, getUserCardDOM }
