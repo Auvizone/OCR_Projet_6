@@ -9,6 +9,7 @@ let photographerPrice = 0;
 let photographsArray = [];
 let x = 1;
 let sortMode = '';
+let lightboxOpened = false;
 
 // Fonction permettant de récupérer les infos du photographe
 async function getPhotographer(id) {
@@ -32,21 +33,24 @@ function findId(photographers, id) {
 
 // Fonction permettant d'ouvrir la lightbox
 function openModale(data) {
+    lightboxOpened = true;
     document.querySelector('.modal-background').style.display="flex";
     x = data.position;
-    console.log('x', x)
+    keyPress();
     const link = `assets/images/Sample Photos/${photographerName}/${photographsArray[x].image}`
     document.getElementById('selectedImage').setAttribute('src', link)
     document.getElementById('main').setAttribute('aria-hidden', true);
     document.getElementById('lightbox').setAttribute('aria-hidden', false);
     let btnClose = document.getElementById('close-modal');
-    console.log("🚀 ~ file: photographer.js ~ line 43 ~ openModale ~ btnClose", btnClose)
     btnClose.focus();
+
 }
 
 //Fonction permettant de fermer la lightbox
 function closeModale() {
     document.querySelector('.modal-background').style.display="none";
+    lightboxOpened = false;
+    keyPress();
 }
 
 // Fonction pour récupérer toutes les images
@@ -62,19 +66,15 @@ async function getPhotographerPictures(data, name) {
     let pos = 0
     const pictureSection = document.getElementById('picture-box');
     pictureSection.textContent = '';
-    console.log('sortMode', sortMode)
     if(sortMode == '') {}
     if(sortMode == 'popularite') {
-        console.log('Trié par likes')
         sortPicturesLikes(data)
     }
     if(sortMode == 'date') {
-        console.log('Trié par Date')
 
         sortPicturesDate(data)
     }
     if(sortMode == 'titre') {
-        console.log('Trié par Titre')
 
         sortPicturesTitre(data)
     }
@@ -114,7 +114,6 @@ function sortPicturesTitre(data) {
 
 // Fonction permettant de trier par likes
 function sortPicturesLikes(data) {
-    console.log('likes')
     data.sort(function (a,b) {
         return b.likes - a.likes
     })
@@ -210,13 +209,11 @@ function chooseTitre() {
 // Fonction pour afficher l'image suivante dans la lightbox
 function nextArray() {
     if (x == photographsArray.length) {
-        console.log('trop loin')
     }
     if ( x < (photographsArray.length - 1)) {
         x = x + 1;
         const link = `assets/images/Sample Photos/${photographerName}/${photographsArray[x].image}`
     document.getElementById('selectedImage').setAttribute('src', link)
-        console.log(photographsArray[x])
     } 
 }
 
@@ -229,6 +226,25 @@ function previousArray() {
     document.getElementById('selectedImage').setAttribute('src', link)
     }
 }
+
+function keyPress() {
+    if(lightboxOpened == true) {
+        document.onkeydown = function (event) {
+            if(event.keyCode == 37) {
+                previousArray()
+            }
+            if(event.keyCode == 39) {
+                nextArray()
+            }
+            else {
+                return;
+            }
+        }
+    }
+    if (lightboxOpened == false) {
+        document.onkeydown = null;
+    }
+    }
 
 // Initiation de la page
 init();
