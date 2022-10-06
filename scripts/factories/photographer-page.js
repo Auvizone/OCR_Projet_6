@@ -16,7 +16,8 @@ function photographerPageFactory(data, photographerName) {
                 openModale(data)
             })
             content = img;
-        } if(data.video !== undefined) {
+        } 
+        if(data.video !== undefined) {
             const video = document.createElement('video');
             video.classList.add('picture')
             video.setAttribute('alt', data.title)

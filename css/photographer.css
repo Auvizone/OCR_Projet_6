@@ -67,6 +67,10 @@ p {
     background-color: #D3573C;
 }
 
+#video-lightbox {
+    height:100%;
+    width: 100%;
+}
 
 .infos-photographe {
     position: fixed;
