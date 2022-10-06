@@ -1,3 +1,7 @@
+// TODO Afficher vidéo dans lightbox
+// TODO aria-hidden marche pas quand lightbox est ouverte
+
+
 //Mettre le code JavaScript lié à la page photographer.html
 let params = (new URL(document.location)).searchParams;
 let id = params.get('id');
@@ -23,27 +27,28 @@ async function getPhotographer(id) {
 
 // Fonction permettant de récupérer l'id du photographe 
 function findId(photographers, id) {
-    var data = photographers.photographers;
-    for (var i = 0; i < data.length; i++) {
-        if (data[i].id == id) {
-            photographer = data[i]
+    let data = photographers.photographers;
+    for (const element of data) {
+        if (element.id == id) {
+            photographer = element
         }
     }
 }
 
 // Fonction permettant d'ouvrir la lightbox
 function openModale(data) {
+    console.log("🚀 ~ file: photographer.js ~ line 36 ~ openModale ~ data", data)
     lightboxOpened = true;
     document.querySelector('.modal-background').style.display="flex";
     x = data.position;
     keyPress();
     const link = `assets/images/Sample Photos/${photographerName}/${photographsArray[x].image}`
     document.getElementById('selectedImage').setAttribute('src', link)
+    document.getElementById('selectedImageName').innerHTML = data.title;
     document.getElementById('main').setAttribute('aria-hidden', true);
     document.getElementById('lightbox').setAttribute('aria-hidden', false);
     let btnClose = document.getElementById('close-modal');
     btnClose.focus();
-
 }
 
 //Fonction permettant de fermer la lightbox
@@ -66,7 +71,9 @@ async function getPhotographerPictures(data, name) {
     let pos = 0
     const pictureSection = document.getElementById('picture-box');
     pictureSection.textContent = '';
-    if(sortMode == '') {}
+    if(sortMode == '') {
+        sortPicturesLikes(data)
+    }
     if(sortMode == 'popularite') {
         sortPicturesLikes(data)
     }
@@ -140,13 +147,13 @@ function getContactData() {
 
 // Fonction permettant d'ajouter ou enlever un like sur une photo/vidéo
 function addLikes(data) {
-    if(data.updated == true) {
+    if(data.updated) {
         data.likes--;
         totalLikes--;
         document.getElementById(`${data.id}`).innerHTML = data.likes + ' ' + `<i class="fa-regular fa-heart"></i>`;
         data.updated = false;
         document.querySelector('.text-info').innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i>`
-    } else if(data.updated != true) {
+    } else if(!data.updated) {
         data.likes++;
         totalLikes++;
         document.getElementById(`${data.id}`).innerHTML = data.likes + ' ' + `<i class="fa-solid fa-heart"></i>`;
@@ -209,26 +216,32 @@ function chooseTitre() {
 // Fonction pour afficher l'image suivante dans la lightbox
 function nextArray() {
     if (x == photographsArray.length) {
+        return;
     }
     if ( x < (photographsArray.length - 1)) {
         x = x + 1;
         const link = `assets/images/Sample Photos/${photographerName}/${photographsArray[x].image}`
     document.getElementById('selectedImage').setAttribute('src', link)
+    document.getElementById('selectedImageName').innerHTML = photographsArray[x].title;
+
     } 
 }
 
 // Fonction pour afficher l'image précédente dans la lightbox
 function previousArray() {
     if (x == 0 ) {
+        return;
     } else {
         x = x - 1;
         const link = `assets/images/Sample Photos/${photographerName}/${photographsArray[x].image}`
     document.getElementById('selectedImage').setAttribute('src', link)
+    document.getElementById('selectedImageName').innerHTML = photographsArray[x].title;
+
     }
 }
 
 function keyPress() {
-    if(lightboxOpened == true) {
+    if(lightboxOpened) {
         document.onkeydown = function (event) {
             if(event.keyCode == 37) {
                 previousArray()
@@ -241,7 +254,7 @@ function keyPress() {
             }
         }
     }
-    if (lightboxOpened == false) {
+    if (!lightboxOpened) {
         document.onkeydown = null;
     }
     }

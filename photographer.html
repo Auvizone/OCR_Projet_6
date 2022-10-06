@@ -24,7 +24,7 @@
           <div id="tag">tag</div>
         </div>
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-        <img id="photo"></img>
+        <img id="photo" alt=""></img>
       </div>
     </div>
   </main>
@@ -39,16 +39,14 @@
   <section class="photos" id="picture-box" aria-hidden="false">
   </section>
   <div id="lightbox" class="modal-background" aria-hidden="true" role="dialog">
-    <div class="navigation">
-      <button id="prev" class="prev nav-btn">
-        <</button>
-          <button id="next" class="next nav-btn">></button>
-    </div>
-
-    <button id="close-modal">close</button>
+    <button id="prev" class="prev nav-btn"><em class="fa-solid fa-chevron-left"></em></button>
+    
     <div class="modal-box">
-      <img id="selectedImage">
+      <img id="selectedImage" alt="">
+      <p id="selectedImageName"></p>
     </div>
+    <button id="next" class="next nav-btn"><em class="fa-solid fa-chevron-right"></em></button>
+    <button id="close-modal"><em class="fa-solid fa-xmark"></em></button>
   </div>
   <div id="contact_modal" aria-hidden="true">
     <div class="modal">
@@ -56,7 +54,7 @@
         <h2 class="contact-me">Contactez-moi
           <span id="photographer-name"></span>
         </h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" />
+        <img src="assets/icons/close.svg" onclick="closeModal()" alt="" />
       </header>
       <form>
         <div>
