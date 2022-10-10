@@ -44,5 +44,4 @@ function photographerFactory(data) {
     function redirectPhotographer(id, test) {
         console.log(test)
         console.log(id)
-        
     }

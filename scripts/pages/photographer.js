@@ -1,6 +1,5 @@
-// TODO Afficher vidéo dans lightbox
+// TODO Fermer modale contact quand on appuie sur le bouton envoyer
 // TODO aria-hidden marche pas quand lightbox est ouverte
-
 
 //Mettre le code JavaScript lié à la page photographer.html
 let params = (new URL(document.location)).searchParams;
@@ -8,19 +7,45 @@ let id = params.get('id');
 let photographer = '';
 let photographerPictures = [];
 let totalLikes = 0;
-let photographerName = '';
+let namePhotographer = '';
 let photographerPrice = 0;
 let photographsArray = [];
 let x = 1;
 let sortMode = '';
 let lightboxOpened = false;
 
+let selectedImage = document.getElementById('selectedImage');
+let selectedImageName = document.getElementById('selectedImageName');
+let main = document.getElementById('main');
+let tri = document.querySelector('.tri');
+let pictureBox = document.getElementById('picture-box');
+let infoPhotographes = document.querySelector('.infos-photographe');
+let lightbox = document.getElementById('lightbox');
+let btnClose = document.getElementById('close-modal');
+let modalBackground = document.querySelector('.modal-background');
+let textInfo = document.querySelector('.text-info');
+let textPrice = document.querySelector('.text-price');
+let photographerName = document.getElementById('photographer-name');
+let prenom = document.getElementById('prenom');
+let nom = document.getElementById('nom');
+let email = document.getElementById('email');
+let message = document.getElementById('message');
+let name = document.getElementById('name');
+let locationId = document.getElementById('location');
+let photo = document.getElementById('photo');
+let tag = document.getElementById('tag');
+let closeModalId = document.getElementById('close-modal');
+let popularite = document.getElementById('option-popularite')
+let date = document.getElementById('option-date')
+let titre = document.getElementById('option-titre')
+
+
 // Fonction permettant de récupérer les infos du photographe
 async function getPhotographer(id) {
     const response = await fetch('../../data/photographers.json');
     const photographers = await response.json();
     findId(photographers, id);
-    photographerName = photographer.name;
+    namePhotographer = photographer.name;
     photographerPrice = photographer.price;
     return (photographer)
 }
@@ -41,21 +66,20 @@ function openModale(data) {
     document.querySelector('.modal-background').style.display = "flex";
     x = data.position;
     keyPress();
-    const link = `assets/images/Sample Photos/${photographerName}/${photographsArray[x].image}`
-    document.getElementById('selectedImage').setAttribute('src', link)
-    document.getElementById('selectedImageName').innerHTML = data.title;
-    document.getElementById('main').setAttribute('aria-hidden', true);
-    document.querySelector('.tri').setAttribute('aria-hidden', true);
-    document.getElementById('picture-box').setAttribute('aria-hidden', true);
-    document.querySelector('.infos-photographe').setAttribute('aria-hidden', true)
-    document.getElementById('lightbox').setAttribute('aria-hidden', false);
-    let btnClose = document.getElementById('close-modal');
+    const link = `assets/images/Sample Photos/${namePhotographer}/${photographsArray[x].image}`
+    selectedImage.setAttribute('src', link)
+    selectedImageName.innerHTML = data.title;
+    main.setAttribute('aria-hidden', true);
+    tri.setAttribute('aria-hidden', true);
+    pictureBox.setAttribute('aria-hidden', true);
+    infoPhotographes.setAttribute('aria-hidden', true);
+    lightbox.setAttribute('aria-hidden', false);
     btnClose.focus();
 }
 
 //Fonction permettant de fermer la lightbox
 function closeModale() {
-    document.querySelector('.modal-background').style.display = "none";
+    modalBackground.style.display = "none";
     lightboxOpened = false;
     keyPress();
 }
@@ -71,8 +95,7 @@ async function getAllPictures(data, name) {
 // Fonction pour récupérer les photos du photographe choisi et de les trier
 async function getPhotographerPictures(data, name) {
     let pos = 0
-    const pictureSection = document.getElementById('picture-box');
-    pictureSection.textContent = '';
+    pictureBox.textContent = '';
     if (sortMode == '') {
         sortPicturesLikes(data)
     }
@@ -96,14 +119,14 @@ async function getPhotographerPictures(data, name) {
             photographsArray.push(element)
 
             const userCardDom = photographPictures.getUserCardDOMPictures();
-            pictureSection.appendChild(userCardDom)
+            pictureBox.appendChild(userCardDom)
         } else {
             return;
         }
         // document.querySelector('.text-info').textContent = `${totalLikes} <i class="fa-solid fa-heart"></i> // ${photographerPrice} € /h`
-        document.querySelector('.text-info').innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i>`
-        document.querySelector('.text-price').innerHTML = `${photographerPrice}€ / jour`
-        document.getElementById('photographer-name').innerHTML = `${photographerName}`;
+        textInfo.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i>`
+        textPrice.innerHTML = `${photographerPrice}€ / jour`
+        photographerName.innerHTML = `${namePhotographer}`;
     });
 }
 
@@ -136,11 +159,6 @@ function sortPicturesDate(data) {
 
 // Fonction permettant de récupérer les données du formulaire de contact
 function getContactData() {
-    const prenom = document.getElementById('prenom');
-    const nom = document.getElementById('nom');
-    const email = document.getElementById('email');
-    const message = document.getElementById('message');
-
     console.log('Prenom:', prenom.value)
     console.log('Nom:', nom.value)
     console.log('Email:', email.value)
@@ -154,13 +172,13 @@ function addLikes(data) {
         totalLikes--;
         document.getElementById(`${data.id}`).innerHTML = data.likes + ' ' + `<i class="fa-regular fa-heart"></i>`;
         data.updated = false;
-        document.querySelector('.text-info').innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i>`
+        textInfo.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i>`
     } else if (!data.updated) {
         data.likes++;
         totalLikes++;
         document.getElementById(`${data.id}`).innerHTML = data.likes + ' ' + `<i class="fa-solid fa-heart"></i>`;
         data.updated = true;
-        document.querySelector('.text-info').innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i>`
+        textInfo.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i>`
     }
 }
 
@@ -169,32 +187,33 @@ async function displayData(data) {
     getAllPictures(data, data.name)
 
     const picture = `assets/photographers/${data.portrait}`;
-    document.getElementById('name').innerHTML = data.name;
-    document.getElementById('location').innerHTML = data.city + ',' + ' ' + data.country
-    document.getElementById('tag').innerHTML = data.tagline;
-    document.getElementById('photo').setAttribute('src', picture)
-    document.getElementById('photo').setAttribute('alt', photographerName)
+    name.innerHTML = data.name;
+    locationId.innerHTML = data.city + ',' + ' ' + data.country
+    tag.innerHTML = data.tagline;
+    photo.setAttribute('src', picture)
+    photo.setAttribute('alt', namePhotographer)
 }
+
+let next = document.getElementById('next');
+let prev = document.getElementById('prev');
+let contactButton = document.getElementById('contact-button');
 
 // Fonction d'initiation de la page
 async function init() {
     const photographer = await getPhotographer(id);
     displayData(photographer);
-    document.getElementById('close-modal').addEventListener('click', closeModale);
-    document.getElementById('next').addEventListener('click', nextArray)
-    document.getElementById('prev').addEventListener('click', previousArray)
-    document.getElementById('contact-button').addEventListener('click', getContactData)
+    closeModalId.addEventListener('click', closeModale);
+    next.addEventListener('click', nextArray)
+    prev.addEventListener('click', previousArray)
+    contactButton.addEventListener('click', getContactData)
 }
+
 
 //Fonction d'initiation du select
 async function initSelect() {
-    const popularite = document.getElementById('option-popularite')
     popularite.addEventListener('click', choosePopularite)
-    const date = document.getElementById('option-date')
     date.addEventListener('click', chooseDate)
-    const titre = document.getElementById('option-titre')
     titre.addEventListener('click', chooseTitre)
-
 }
 
 // Fonction pour régénérer le contenu après avoir filtré par likes
@@ -232,7 +251,7 @@ function nextArray() {
                 document.querySelector('.modal-box').insertBefore(newImage, title)
             }
             console.log('image')
-            const link = `assets/images/Sample Photos/${photographerName}/${photographsArray[x].image}`
+            const link = `assets/images/Sample Photos/${namePhotographer}/${photographsArray[x].image}`
             document.getElementById('selectedImage').setAttribute('src', link)
             document.getElementById('selectedImageName').innerHTML = photographsArray[x].title;
             const video = document.getElementById('video-lightbox');
@@ -241,7 +260,7 @@ function nextArray() {
             }
         } else if (photographsArray[x].video) {
             console.log('video')
-            const link = `assets/images/Sample Photos/${photographerName}/${photographsArray[x].video}`;
+            const link = `assets/images/Sample Photos/${namePhotographer}/${photographsArray[x].video}`;
             const video = document.createElement('video');
             const image = document.getElementById('selectedImage');
             console.log("🚀 ~ file: photographer.js ~ line 237 ~ nextArray ~ image", image)
@@ -275,7 +294,7 @@ function previousArray() {
                 document.querySelector('.modal-box').insertBefore(newImage, title)
             }
             console.log('image')
-            const link = `assets/images/Sample Photos/${photographerName}/${photographsArray[x].image}`
+            const link = `assets/images/Sample Photos/${namePhotographer}/${photographsArray[x].image}`
             document.getElementById('selectedImage').setAttribute('src', link)
             document.getElementById('selectedImageName').innerHTML = photographsArray[x].title;
             const video = document.getElementById('video-lightbox');
@@ -284,7 +303,7 @@ function previousArray() {
             }
         } else if (photographsArray[x].video) {
             console.log('video')
-            const link = `assets/images/Sample Photos/${photographerName}/${photographsArray[x].video}`;
+            const link = `assets/images/Sample Photos/${namePhotographer}/${photographsArray[x].video}`;
             const video = document.createElement('video');
             const image = document.getElementById('selectedImage');
             console.log("🚀 ~ file: photographer.js ~ line 237 ~ nextArray ~ image", image)
