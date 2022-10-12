@@ -1,3 +1,9 @@
+/** Fonction pour générer et afficher les images du photographe sur sa page
+ * 
+ * @param {*} data - Données de toutes les photos du photographe
+ * @param {*} photographerName - Nom du photographe
+ * @returns 
+ */
 function photographerPageFactory(data, photographerName) {
     const { name, portrait, city, country, price, date, tagline, id } = data;
     const pictureLink = `assets/images/Sample Photos/${photographerName}/${data.image}`;
@@ -25,9 +31,6 @@ function photographerPageFactory(data, photographerName) {
             const source = document.createElement('source')
             source.setAttribute('src', videoLink)
             source.setAttribute('type', 'video/mp4')
-            // source.addEventListener('click', function passData() {
-            //     openModale(data)
-            // })
             video.appendChild(source);
             content = video;
         }

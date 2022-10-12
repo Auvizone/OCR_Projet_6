@@ -1,3 +1,9 @@
+    /** Factory pour générer le bloc de chaque photographe sur la page d'accueil
+     * 
+     * @param data - Données de tous les photographes
+     * @returns - Articles photographes
+     * 
+     */
 function photographerFactory(data) {
     console.log(data)
     const { name, portrait, city, country, price, tagline, id } = data;
@@ -35,13 +41,3 @@ function photographerFactory(data) {
     }
     return { name, picture, city, price, tagline, getUserCardDOM }
 }
-
-    /** Transmettre l'id
-     * 
-     * @param id- L'id du photographre
-     * @return The photographer
-     */
-    function redirectPhotographer(id, test) {
-        console.log(test)
-        console.log(id)
-    }

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <link href="css/photographer.css" rel="stylesheet" type="text/css" />
+  <link href="css/photographer.css" rel="stylesheet" type="text/css">
   <meta charset="utf-8">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
           <div id="tag">tag</div>
         </div>
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-        <img id="photo" alt=""></img>
+        <img src="" id="photo" alt="">
       </div>
     </div>
   </main>
@@ -42,7 +42,7 @@
     <button id="prev" class="prev nav-btn"><em class="fa-solid fa-chevron-left"></em></button>
     
     <div class="modal-box">
-      <img id="selectedImage" alt="">
+      <img src="" id="selectedImage" alt="">
       <p id="selectedImageName"></p>
     </div>
     <button id="next" class="next nav-btn"><em class="fa-solid fa-chevron-right"></em></button>
@@ -54,24 +54,24 @@
         <h2 class="contact-me">Contactez-moi
           <span id="photographer-name"></span>
         </h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" alt="" />
+        <img src="assets/icons/close.svg" onclick="closeModal()" alt="">
       </header>
       <form>
         <div>
           <label for="prenom" class="label">Prénom</label>
-          <input id="prenom" />
+          <input id="prenom">
         </div>
         <div>
           <label for="nom" class="label">Nom</label>
-          <input id="nom" />
+          <input id="nom">
         </div>
         <div>
           <label for="email" class="label">Email</label>
-          <input id="email" />
+          <input id="email">
         </div>
         <div>
           <label for="message" class="label">Votre message</label>
-          <input id="message" class="textarea" />
+          <input id="message" class="textarea">
         </div>
       </form>
       <button id="contact-button" class="contact_button">Envoyer</button>

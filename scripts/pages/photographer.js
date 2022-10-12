@@ -1,11 +1,15 @@
 // TODO Fermer modale contact quand on appuie sur le bouton envoyer
 // TODO aria-hidden marche pas quand lightbox est ouverte
 
+// ? Demander pour le aria-hidden sur body
+// ? Demander pour array de photos pour la lightbox si la méthode est bonne (ligne 273)
+// ? Demander pour le tri si la méthode est bonne (ligne 119 - 193)
+// ? Demander pour les keycodes (ligne 355)
+
 //Mettre le code JavaScript lié à la page photographer.html
 let params = (new URL(document.location)).searchParams;
 let id = params.get('id');
 let photographer = '';
-let photographerPictures = [];
 let totalLikes = 0;
 let namePhotographer = '';
 let photographerPrice = 0;
@@ -35,12 +39,19 @@ let locationId = document.getElementById('location');
 let photo = document.getElementById('photo');
 let tag = document.getElementById('tag');
 let closeModalId = document.getElementById('close-modal');
-let popularite = document.getElementById('option-popularite')
-let date = document.getElementById('option-date')
-let titre = document.getElementById('option-titre')
+let popularite = document.getElementById('option-popularite');
+let date = document.getElementById('option-date');
+let titre = document.getElementById('option-titre');
+let next = document.getElementById('next');
+let prev = document.getElementById('prev');
+let contactButton = document.getElementById('contact-button');
 
-
-// Fonction permettant de récupérer les infos du photographe
+/** Fonction permettant de récupérer les infos du photographe
+ * 
+* @params id - L'id du photographe
+* 
+* @return Les données du photographe
+*/
 async function getPhotographer(id) {
     const response = await fetch('../../data/photographers.json');
     const photographers = await response.json();
@@ -50,7 +61,12 @@ async function getPhotographer(id) {
     return (photographer)
 }
 
-// Fonction permettant de récupérer l'id du photographe 
+/** Fonction permettant de récupérer le photographe sélectionné parmis la liste
+ * 
+ * @param photographer - Liste des photographes
+ * @param id - id du photographe
+ * @return Photographe sélectionné 
+ * */ 
 function findId(photographers, id) {
     let data = photographers.photographers;
     for (const element of data) {
@@ -60,7 +76,10 @@ function findId(photographers, id) {
     }
 }
 
-// Fonction permettant d'ouvrir la lightbox
+/** Fonction permettant d'ouvrir la lightbox
+ * 
+ * @param data - Données de l'image cliquée 
+ */
 function openModale(data) {
     lightboxOpened = true;
     document.querySelector('.modal-background').style.display = "flex";
@@ -77,14 +96,19 @@ function openModale(data) {
     btnClose.focus();
 }
 
-//Fonction permettant de fermer la lightbox
+/** Fonction permettant de fermer la lightbox
+ * */
 function closeModale() {
     modalBackground.style.display = "none";
     lightboxOpened = false;
     keyPress();
 }
 
-// Fonction pour récupérer toutes les images
+/** Fonction pour récupérer toutes les images
+ * 
+ * @param data - Données du photographe sélectionné
+ * @param name - Nom du photographe
+ */
 async function getAllPictures(data, name) {
     const response = await fetch(`../../data/photographers.json`)
     const pictures = await response.json();
@@ -92,7 +116,11 @@ async function getAllPictures(data, name) {
     return (response)
 }
 
-// Fonction pour récupérer les photos du photographe choisi et de les trier
+/** Fonction pour récupérer les photos du photographe choisi et de les trier
+ * 
+ * @param data - Data de toutes les photos
+ * @param name - Nom du photographe
+ */
 async function getPhotographerPictures(data, name) {
     let pos = 0
     pictureBox.textContent = '';
@@ -103,11 +131,9 @@ async function getPhotographerPictures(data, name) {
         sortPicturesLikes(data)
     }
     if (sortMode == 'date') {
-
         sortPicturesDate(data)
     }
     if (sortMode == 'titre') {
-
         sortPicturesTitre(data)
     }
     data.forEach(element => {
@@ -117,7 +143,6 @@ async function getPhotographerPictures(data, name) {
             pos++;
             const photographPictures = photographerPageFactory(element, name)
             photographsArray.push(element)
-
             const userCardDom = photographPictures.getUserCardDOMPictures();
             pictureBox.appendChild(userCardDom)
         } else {
@@ -130,7 +155,11 @@ async function getPhotographerPictures(data, name) {
     });
 }
 
-// Fonction permettant de trier par titre
+/** Fonction permettant de trier par titre
+ * 
+ * @param data - Photos du photographe
+ * @returns - Photos triées par titre
+ */
 function sortPicturesTitre(data) {
     data.sort(function (a, b) {
         if (a.title < b.title) {
@@ -144,20 +173,26 @@ function sortPicturesTitre(data) {
     return data;
 }
 
-// Fonction permettant de trier par likes
+/** Fonction permettant de trier par likes
+ * 
+ * @param data - Photos du photographe
+ */
 function sortPicturesLikes(data) {
     data.sort(function (a, b) {
         return b.likes - a.likes
     })
 }
-// Fonction permettant de trier par date
+/** Fonction permettant de trier par date
+ * 
+ * @param data - Photos du photographe
+ */
 function sortPicturesDate(data) {
     data.sort(function (a, b) {
         return new Date(b.date) - new Date(a.date)
     })
 }
 
-// Fonction permettant de récupérer les données du formulaire de contact
+/** Fonction permettant de récupérer les données du formulaire de contact */
 function getContactData() {
     console.log('Prenom:', prenom.value)
     console.log('Nom:', nom.value)
@@ -165,7 +200,10 @@ function getContactData() {
     console.log('Message:', message.value)
 }
 
-// Fonction permettant d'ajouter ou enlever un like sur une photo/vidéo
+/** Fonction permettant d'ajouter ou enlever un like sur une photo/vidéo
+ * 
+ * @param data - Données de l'image ou le like est ajouté
+ */
 function addLikes(data) {
     if (data.updated) {
         data.likes--;
@@ -182,10 +220,12 @@ function addLikes(data) {
     }
 }
 
-// Fonction permettant de générer les infos du photographe
+/** Fonction permettant de générer les infos du photographe
+ * 
+ * @param data - Données du photographe
+ */
 async function displayData(data) {
     getAllPictures(data, data.name)
-
     const picture = `assets/photographers/${data.portrait}`;
     name.innerHTML = data.name;
     locationId.innerHTML = data.city + ',' + ' ' + data.country
@@ -194,11 +234,7 @@ async function displayData(data) {
     photo.setAttribute('alt', namePhotographer)
 }
 
-let next = document.getElementById('next');
-let prev = document.getElementById('prev');
-let contactButton = document.getElementById('contact-button');
-
-// Fonction d'initiation de la page
+/** Fonction d'initiation de la page */
 async function init() {
     const photographer = await getPhotographer(id);
     displayData(photographer);
@@ -209,35 +245,34 @@ async function init() {
 }
 
 
-//Fonction d'initiation du select
+/** Fonction d'initiation du select */
 async function initSelect() {
     popularite.addEventListener('click', choosePopularite)
     date.addEventListener('click', chooseDate)
     titre.addEventListener('click', chooseTitre)
 }
 
-// Fonction pour régénérer le contenu après avoir filtré par likes
+/** Fonction pour régénérer le contenu après avoir filtré par likes */
 function choosePopularite() {
     sortMode = 'popularite';
     init();
 }
 
-// Fonction pour régénérer le contenu après avoir filtré par date
+/** Fonction pour régénérer le contenu après avoir filtré par date */
 function chooseDate() {
     sortMode = 'date';
     init();
 }
 
-// Fonction pour régénérer le contenu après avoir filtré par titre
+/** Fonction pour régénérer le contenu après avoir filtré par titre */
 function chooseTitre() {
     sortMode = 'titre';
     init();
 }
 
-// Fonction pour afficher l'image suivante dans la lightbox
+/** Fonction pour afficher l'image suivante dans la lightbox */
 function nextArray() {
     if (x == photographsArray.length) {
-        console.log('test')
         return;
     }
     if (x < (photographsArray.length - 1)) {
@@ -250,7 +285,6 @@ function nextArray() {
                 const title = document.getElementById('selectedImageName')
                 document.querySelector('.modal-box').insertBefore(newImage, title)
             }
-            console.log('image')
             const link = `assets/images/Sample Photos/${namePhotographer}/${photographsArray[x].image}`
             document.getElementById('selectedImage').setAttribute('src', link)
             document.getElementById('selectedImageName').innerHTML = photographsArray[x].title;
@@ -259,11 +293,9 @@ function nextArray() {
                 document.querySelector('.modal-box').removeChild(video)
             }
         } else if (photographsArray[x].video) {
-            console.log('video')
             const link = `assets/images/Sample Photos/${namePhotographer}/${photographsArray[x].video}`;
             const video = document.createElement('video');
             const image = document.getElementById('selectedImage');
-            console.log("🚀 ~ file: photographer.js ~ line 237 ~ nextArray ~ image", image)
             if(image) {
                 document.querySelector('.modal-box').removeChild(image)
             }
@@ -279,7 +311,7 @@ function nextArray() {
     }
 }
 
-// Fonction pour afficher l'image précédente dans la lightbox
+/** Fonction pour afficher l'image précédente dans la lightbox */
 function previousArray() {
     if (x == 0) {
         return;
@@ -293,7 +325,6 @@ function previousArray() {
                 newImage.setAttribute('id', 'selectedImage');
                 document.querySelector('.modal-box').insertBefore(newImage, title)
             }
-            console.log('image')
             const link = `assets/images/Sample Photos/${namePhotographer}/${photographsArray[x].image}`
             document.getElementById('selectedImage').setAttribute('src', link)
             document.getElementById('selectedImageName').innerHTML = photographsArray[x].title;
@@ -302,11 +333,9 @@ function previousArray() {
                 document.querySelector('.modal-box').removeChild(video)
             }
         } else if (photographsArray[x].video) {
-            console.log('video')
             const link = `assets/images/Sample Photos/${namePhotographer}/${photographsArray[x].video}`;
             const video = document.createElement('video');
             const image = document.getElementById('selectedImage');
-            console.log("🚀 ~ file: photographer.js ~ line 237 ~ nextArray ~ image", image)
             if(image) {
                 document.querySelector('.modal-box').removeChild(image)
             }
@@ -323,6 +352,7 @@ function previousArray() {
     }
 }
 
+/** Function pour détecter l'appui des touches et naviguer dans la lightbox */
 function keyPress() {
     if (lightboxOpened) {
         document.onkeydown = function (event) {
