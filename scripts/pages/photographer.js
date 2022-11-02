@@ -55,7 +55,9 @@ function openModale(data) {
   let infoPhotographes = document.querySelector(".infos-photographe");
   let lightbox = document.getElementById("lightbox");
   let btnClose = document.getElementById("close-modal");
+  let video = document.getElementById("video-lightbox");
 
+  video.style.display = "none";
   lightboxOpened = true;
   document.querySelector(".modal-background").style.display = "flex";
   x = data.position;
@@ -274,38 +276,32 @@ function nextArray() {
     return;
   }
   if (x < photographsArray.length - 1) {
+    const video = document.getElementById("video-lightbox");
+    const image = document.getElementById("selectedImage");
+    const title = document.getElementById("selectedImageName");
     x = x + 1;
     if (photographsArray[x].image) {
-      const image = document.getElementById("selectedImage");
-      if (!image) {
-        const title = document.getElementById("selectedImageName");
-        const newImage = document.createElement("img");
-        newImage.setAttribute("id", "selectedImage");
-        document.querySelector(".modal-box").insertBefore(newImage, title);
+      const source = document.getElementById('source-video');
+      if (source) {
+        source.remove();
       }
+      image.style.display = "block";
+      video.style.display = "none";
       const link = `assets/images/Sample Photos/${namePhotographer}/${photographsArray[x].image}`;
-      document.getElementById("selectedImage").setAttribute("src", link);
-      document.getElementById("selectedImageName").innerHTML =
-        photographsArray[x].title;
-      const video = document.getElementById("video-lightbox");
-      if (video) {
-        document.querySelector(".modal-box").removeChild(video);
-      }
+      image.setAttribute("src", link);
+      title.innerHTML =
+      photographsArray[x].title;
     } else if (photographsArray[x].video) {
       const link = `assets/images/Sample Photos/${namePhotographer}/${photographsArray[x].video}`;
-      const video = document.createElement("video");
-      const image = document.getElementById("selectedImage");
-      if (image) {
-        document.querySelector(".modal-box").removeChild(image);
-      }
-      const title = document.getElementById("selectedImageName");
-      video.setAttribute("id", "video-lightbox");
-      video.setAttribute("controls", true);
-      const source = document.createElement("source");
-      source.setAttribute("src", link);
+      let source = document.createElement('source')
+      source.setAttribute("id", "source-video");
       source.setAttribute("type", "video/mp4");
-      video.appendChild(source);
-      document.querySelector(".modal-box").insertBefore(video, title);
+      source.setAttribute("src", link);
+      video.appendChild(source)
+      video.style.display = "block";
+      image.style.display = "none";
+      title.innerHTML =
+        photographsArray[x].title;
     }
   }
 }
@@ -315,38 +311,33 @@ function previousArray() {
   if (x == 0) {
     return;
   } else {
+    const image = document.getElementById("selectedImage");
+    const video = document.getElementById("video-lightbox");
+    const title = document.getElementById("selectedImageName");
+    const source = document.getElementById("video-source");
     x = x - 1;
     if (photographsArray[x].image) {
-      const image = document.getElementById("selectedImage");
-      if (!image) {
-        const title = document.getElementById("selectedImageName");
-        const newImage = document.createElement("img");
-        newImage.setAttribute("id", "selectedImage");
-        document.querySelector(".modal-box").insertBefore(newImage, title);
+      const source = document.getElementById('source-video');
+      if (source) {
+        source.remove();
       }
+      image.style.display = "block";
+      video.style.display = "none";
       const link = `assets/images/Sample Photos/${namePhotographer}/${photographsArray[x].image}`;
-      document.getElementById("selectedImage").setAttribute("src", link);
-      document.getElementById("selectedImageName").innerHTML =
-        photographsArray[x].title;
-      const video = document.getElementById("video-lightbox");
-      if (video) {
-        document.querySelector(".modal-box").removeChild(video);
-      }
+      image.setAttribute("src", link);
+      title.innerHTML =
+      photographsArray[x].title;
     } else if (photographsArray[x].video) {
       const link = `assets/images/Sample Photos/${namePhotographer}/${photographsArray[x].video}`;
-      const video = document.createElement("video");
-      const image = document.getElementById("selectedImage");
-      if (image) {
-        document.querySelector(".modal-box").removeChild(image);
-      }
-      const title = document.getElementById("selectedImageName");
-      video.setAttribute("id", "video-lightbox");
-      video.setAttribute("controls", true);
-      const source = document.createElement("source");
-      source.setAttribute("src", link);
+      let source = document.createElement('source')
+      source.setAttribute("id", "source-video");
       source.setAttribute("type", "video/mp4");
-      video.appendChild(source);
-      document.querySelector(".modal-box").insertBefore(video, title);
+      source.setAttribute("src", link);
+      video.appendChild(source)
+      video.style.display = "block";
+      image.style.display = "none";
+      title.innerHTML =
+        photographsArray[x].title;
     }
   }
 }

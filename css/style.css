@@ -30,6 +30,14 @@ p {
     margin-left: 100px;
 }
 
+#selectedImage {
+    display:none;
+}
+
+#video-lightbox {
+    display: none;
+}
+
 .photographer_section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

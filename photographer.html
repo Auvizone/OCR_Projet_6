@@ -39,14 +39,17 @@
   <section class="photos" id="picture-box" aria-hidden="false">
   </section>
   <div id="lightbox" class="modal-background" aria-hidden="true" role="dialog">
+    <button id="close-modal"><em class="fa-solid fa-xmark"></em></button>
     <button id="prev" class="prev nav-btn"><em class="fa-solid fa-chevron-left"></em></button>
     
     <div class="modal-box">
       <img src="" id="selectedImage" alt="">
+      <video id="video-lightbox" controls>
+        <!-- <source id="video-source" src="" type="video/mp4"> -->
+      </video>
       <p id="selectedImageName"></p>
     </div>
     <button id="next" class="next nav-btn"><em class="fa-solid fa-chevron-right"></em></button>
-    <button id="close-modal"><em class="fa-solid fa-xmark"></em></button>
   </div>
   <div id="contact_modal" aria-hidden="true">
     <div class="modal">
