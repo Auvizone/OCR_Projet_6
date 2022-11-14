@@ -87,7 +87,7 @@ function closeModale() {
  * @param data - Données du photographe sélectionné
  * @param name - Nom du photographe
  */
-async function getAllPictures(data, name) {
+async function getAllPictures(name) {
   const response = await fetch(`../../data/photographers.json`);
   const pictures = await response.json();
   getPhotographerPictures(pictures.media, name);
@@ -105,7 +105,6 @@ async function getPhotographerPictures(data, name) {
   let textPrice = document.querySelector(".text-price");
   let photographerName = document.getElementById("photographer-name");
   let pos = 0;
-  pictureBox.textContent = "";
   if (sortMode == "") {
     sortPicturesLikes(data);
   }
@@ -130,7 +129,6 @@ async function getPhotographerPictures(data, name) {
     } else {
       return;
     }
-    // document.querySelector('.text-info').textContent = `${totalLikes} <i class="fa-solid fa-heart"></i> // ${photographerPrice} € /h`
     textInfo.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i>`;
     textPrice.innerHTML = `${photographerPrice}€ / jour`;
     photographerName.innerHTML = `${namePhotographer}`;
@@ -216,11 +214,11 @@ function addLikes(data) {
  */
 async function displayData(data) {
   let photo = document.getElementById("photo");
-  getAllPictures(data, data.name);
   let name = document.getElementById("name");
   let locationId = document.getElementById("location");
   let tag = document.getElementById("tag");
   const picture = `assets/photographers/${data.portrait}`;
+  getAllPictures(data.name);
   name.innerHTML = data.name;
   locationId.innerHTML = data.city + "," + " " + data.country;
   tag.innerHTML = data.tagline;
@@ -228,18 +226,22 @@ async function displayData(data) {
   photo.setAttribute("alt", namePhotographer);
 }
 
-/** Fonction d'initiation de la page */
-async function init() {
-  const photographer = await getPhotographer(id);
+function initEvents() {
   let closeModalId = document.getElementById("close-modal");
   let next = document.getElementById("next");
   let prev = document.getElementById("prev");
   let contactButton = document.getElementById("contact-button");
-  displayData(photographer);
   closeModalId.addEventListener("click", closeModale);
   next.addEventListener("click", nextArray);
   prev.addEventListener("click", previousArray);
   contactButton.addEventListener("click", getContactData);
+}
+
+/** Fonction d'initiation de la page */
+async function init() {
+  const photographer = await getPhotographer(id);
+  console.log(photographer)
+  displayData(photographer);
 }
 
 /** Fonction d'initiation du select */
@@ -367,3 +369,4 @@ function keyPress() {
 // Initiation de la page
 init();
 initSelect();
+initEvents();

@@ -34,9 +34,6 @@ function photographerFactory(data) {
         article.appendChild(location)
         article.appendChild(tag)
         article.appendChild(priceTag)
-        // article.addEventListener('click', () => {
-        //     window.location.href = `http://127.0.0.1:5500/photographer.html?id=${id}`
-        // })
         return (article);
     }
     return { name, picture, city, price, tagline, getUserCardDOM }
