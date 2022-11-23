@@ -240,7 +240,6 @@ function initEvents() {
 /** Fonction d'initiation de la page */
 async function init() {
   const photographer = await getPhotographer(id);
-  console.log(photographer)
   displayData(photographer);
 }
 
