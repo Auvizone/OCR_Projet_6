@@ -17,6 +17,7 @@ function photographerPageFactory(data, photographerName) {
             const img = document.createElement('img');
             img.setAttribute('src', pictureLink)
             img.setAttribute('alt', data.title)
+            img.setAttribute('tabindex', 0)
             img.classList.add('picture')
             img.addEventListener('click', function passData() {
                 openModale(data)
