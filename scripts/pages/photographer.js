@@ -244,16 +244,7 @@ async function init() {
   displayData(photographer);
 }
 
-/** Fonction d'initiation du select */
-async function initSelect() {
-  // let popularite = document.getElementById("option-popularite");
-  // let date = document.getElementById("option-date");
-  // let titre = document.getElementById("option-titre");
-  // popularite.addEventListener("change", choosePopularite);
-  // date.addEventListener("change", chooseDate);
-  // titre.addEventListener("change", chooseTitre);
-}
-
+/** Function permettant d'appliquer le choix du select */
 function chooseSelect() {
   let select = document.getElementById('select')
   console.log("🚀 ~ file: photographer.js ~ line 259 ~ chooseSelect ~ select", select.value)
@@ -382,5 +373,4 @@ function keyPress() {
 
 // Initiation de la page
 init();
-initSelect();
 initEvents();
