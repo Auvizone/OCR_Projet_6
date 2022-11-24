@@ -49,11 +49,6 @@ function findId(photographers, id) {
 function openModale(data) {
   let selectedImage = document.getElementById("selectedImage");
   let selectedImageName = document.getElementById("selectedImageName");
-  let main = document.getElementById("main");
-  let tri = document.querySelector(".tri");
-  let pictureBox = document.getElementById("picture-box");
-  let infoPhotographes = document.querySelector(".infos-photographe");
-  let lightbox = document.getElementById("lightbox");
   let btnClose = document.getElementById("close-modal");
   let video = document.getElementById("video-lightbox");
 
@@ -65,11 +60,6 @@ function openModale(data) {
   const link = `assets/images/Sample Photos/${namePhotographer}/${photographsArray[x].image}`;
   selectedImage.setAttribute("src", link);
   selectedImageName.innerHTML = data.title;
-  main.setAttribute("aria-hidden", true);
-  tri.setAttribute("aria-hidden", true);
-  pictureBox.setAttribute("aria-hidden", true);
-  infoPhotographes.setAttribute("aria-hidden", true);
-  lightbox.setAttribute("aria-hidden", false);
   btnClose.focus();
 }
 
@@ -249,7 +239,6 @@ async function init() {
 /** Function permettant d'appliquer le choix du select */
 function chooseSelect() {
   let select = document.getElementById('select')
-  console.log("🚀 ~ file: photographer.js ~ line 259 ~ chooseSelect ~ select", select.value)
   if (select.value == 'Date') {
     chooseDate()
   }
