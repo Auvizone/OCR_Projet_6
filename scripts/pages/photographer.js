@@ -106,6 +106,7 @@ async function getPhotographerPictures(data, name) {
   let photographerName = document.getElementById("photographer-name");
   pictureBox.innerHTML = "";
   let pos = 0;
+  photographsArray = [];
   if (sortMode == "") {
     sortPicturesLikes(data);
   }
@@ -130,6 +131,7 @@ async function getPhotographerPictures(data, name) {
     } else {
       return;
     }
+    console.log(photographsArray)
     textInfo.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i>`;
     textPrice.innerHTML = `${photographerPrice}€ / jour`;
     photographerName.innerHTML = `${namePhotographer}`;
