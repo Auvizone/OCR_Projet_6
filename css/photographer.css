@@ -345,6 +345,7 @@ form input {
     padding: 10px;
     border: none;
     border-radius: 5px;
+    color: white;
 }
 
 .select * {

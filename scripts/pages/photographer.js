@@ -315,7 +315,6 @@ function previousArray() {
     const image = document.getElementById("selectedImage");
     const video = document.getElementById("video-lightbox");
     const title = document.getElementById("selectedImageName");
-    const source = document.getElementById("video-source");
     x = x - 1;
     if (photographsArray[x].image) {
       const source = document.getElementById('source-video');
