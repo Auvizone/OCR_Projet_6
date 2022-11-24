@@ -104,6 +104,7 @@ async function getPhotographerPictures(data, name) {
   let textInfo = document.querySelector(".text-info");
   let textPrice = document.querySelector(".text-price");
   let photographerName = document.getElementById("photographer-name");
+  pictureBox.innerHTML = "";
   let pos = 0;
   if (sortMode == "") {
     sortPicturesLikes(data);
@@ -245,16 +246,31 @@ async function init() {
 
 /** Fonction d'initiation du select */
 async function initSelect() {
-  let popularite = document.getElementById("option-popularite");
-  let date = document.getElementById("option-date");
-  let titre = document.getElementById("option-titre");
-  popularite.addEventListener("click", choosePopularite);
-  date.addEventListener("click", chooseDate);
-  titre.addEventListener("click", chooseTitre);
+  // let popularite = document.getElementById("option-popularite");
+  // let date = document.getElementById("option-date");
+  // let titre = document.getElementById("option-titre");
+  // popularite.addEventListener("change", choosePopularite);
+  // date.addEventListener("change", chooseDate);
+  // titre.addEventListener("change", chooseTitre);
+}
+
+function chooseSelect() {
+  let select = document.getElementById('select')
+  console.log("🚀 ~ file: photographer.js ~ line 259 ~ chooseSelect ~ select", select.value)
+  if (select.value == 'Date') {
+    chooseDate()
+  }
+  if (select.value == 'Popularite') {
+    choosePopularite()
+  }
+  if (select.value == 'Titre') {
+    chooseTitre()
+  }
 }
 
 /** Fonction pour régénérer le contenu après avoir filtré par likes */
 function choosePopularite() {
+  console.log('popularite')
   sortMode = "popularite";
   init();
 }
