@@ -19,6 +19,10 @@ function photographerPageFactory(data, photographerName) {
             img.setAttribute('alt', data.title)
             img.setAttribute('tabindex', 0)
             img.classList.add('picture')
+            img.addEventListener('keypress', function passData() {
+                if(event.key == "Enter")
+                openModale(data)
+            })
             img.addEventListener('click', function passData() {
                 openModale(data)
             })
