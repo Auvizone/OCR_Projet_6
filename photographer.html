@@ -10,6 +10,8 @@
 </head>
 
 <body>
+  <section id="main-container">
+
   <header aria-hidden="false">
     <a href="http://127.0.0.1:5500/">
       <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page">
@@ -38,7 +40,17 @@
   </div>
   <section class="photos" id="picture-box">
   </section>
-  <div id="lightbox" class="modal-background" aria-hidden="true" role="dialog">
+  
+  
+  <div class="infos-photographe" aria-hidden="false">
+    <p class="text-info"></p>
+    <p class="text-price"></p>
+  </div>
+
+</section>
+
+
+  <div id="lightbox" class="modal-background" aria-hidden="false" role="dialog">
     <button id="close-modal"><em class="fa-solid fa-xmark"></em></button>
     <button id="prev" class="prev nav-btn"><em class="fa-solid fa-chevron-left"></em></button>
     
@@ -50,7 +62,9 @@
     </div>
     <button id="next" class="next nav-btn"><em class="fa-solid fa-chevron-right"></em></button>
   </div>
-  <div id="contact_modal" aria-hidden="true">
+
+
+  <div id="contact_modal">
     <div class="modal">
       <header>
         <h2 class="contact-me">Contactez-moi
@@ -78,10 +92,6 @@
       </form>
       <button id="contact-button" class="contact_button">Envoyer</button>
     </div>
-  </div>
-  <div class="infos-photographe" aria-hidden="false">
-    <p class="text-info"></p>
-    <p class="text-price"></p>
   </div>
   <script src="scripts/factories/Photographer-page.js"></script>
   <script src="scripts/factories/Photographer.js"></script>
