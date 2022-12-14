@@ -59,6 +59,7 @@ function openModale(data) {
   keyPress();
   const link = `assets/images/Sample Photos/${namePhotographer}/${photographsArray[x].image}`;
   selectedImage.setAttribute("src", link);
+  selectedImage.setAttribute("alt", data.title)
   selectedImageName.innerHTML = data.title;
   btnClose.focus();
 }
@@ -121,7 +122,6 @@ async function getPhotographerPictures(data, name) {
     } else {
       return;
     }
-    console.log(photographsArray)
     textInfo.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i>`;
     textPrice.innerHTML = `${photographerPrice}€ / jour`;
     photographerName.innerHTML = `${namePhotographer}`;
@@ -252,7 +252,6 @@ function chooseSelect() {
 
 /** Fonction pour régénérer le contenu après avoir filtré par likes */
 function choosePopularite() {
-  console.log('popularite')
   sortMode = "popularite";
   init();
 }
@@ -288,19 +287,19 @@ function nextArray() {
       video.style.display = "none";
       const link = `assets/images/Sample Photos/${namePhotographer}/${photographsArray[x].image}`;
       image.setAttribute("src", link);
-      title.innerHTML =
-      photographsArray[x].title;
+      image.setAttribute("alt", photographsArray[x].title)
+      title.innerHTML = photographsArray[x].title;
     } else if (photographsArray[x].video) {
       const link = `assets/images/Sample Photos/${namePhotographer}/${photographsArray[x].video}`;
       let source = document.createElement('source')
       source.setAttribute("id", "source-video");
       source.setAttribute("type", "video/mp4");
       source.setAttribute("src", link);
+      video.setAttribute("src", photographsArray[x].title)
       video.appendChild(source)
       video.style.display = "block";
       image.style.display = "none";
-      title.innerHTML =
-        photographsArray[x].title;
+      title.innerHTML = photographsArray[x].title;
     }
   }
 }
@@ -323,6 +322,7 @@ function previousArray() {
       video.style.display = "none";
       const link = `assets/images/Sample Photos/${namePhotographer}/${photographsArray[x].image}`;
       image.setAttribute("src", link);
+      image.setAttribute("alt", photographsArray[x].title)
       title.innerHTML =
       photographsArray[x].title;
     } else if (photographsArray[x].video) {
@@ -332,6 +332,7 @@ function previousArray() {
       source.setAttribute("type", "video/mp4");
       source.setAttribute("src", link);
       video.appendChild(source)
+      video.setAttribute("src", photographsArray[x].title)
       video.style.display = "block";
       image.style.display = "none";
       title.innerHTML =
