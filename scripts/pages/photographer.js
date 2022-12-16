@@ -128,6 +128,7 @@ async function getPhotographerPictures(data, name) {
   });
 }
 
+
 /** Fonction permettant de trier par titre
  *
  * @param data - Photos du photographe
