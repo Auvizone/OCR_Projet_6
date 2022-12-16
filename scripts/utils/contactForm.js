@@ -28,7 +28,6 @@ function trapFocus(element) {
 
     if (isTabPressed && !e.shiftKey) {
       if (document.activeElement === lastElement) {
-        console.log("tab");
 
         firstElement.focus();
         e.preventDefault();
@@ -37,7 +36,6 @@ function trapFocus(element) {
     if (e.shiftKey) {
       if (isTabPressed) {
         /* shift + tab */ if (document.activeElement === firstElement) {
-          console.log("shift tab");
           lastElement.focus();
           e.preventDefault();
         }
