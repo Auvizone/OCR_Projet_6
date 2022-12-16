@@ -279,7 +279,6 @@ function nextArray() {
     const image = document.getElementById("selectedImage");
     const title = document.getElementById("selectedImageName");
     x = x + 1;
-    console.log(photographsArray[x]);
     if (photographsArray[x].image) {
       const source = document.getElementById('source-video');
       if (source) {
@@ -293,7 +292,6 @@ function nextArray() {
       title.innerHTML = photographsArray[x].title;
     } else if (photographsArray[x].video) {
       const link = `assets/images/Sample Photos/${namePhotographer}/${photographsArray[x].video}`;
-      console.log(link)
       let source = document.createElement('source')
       source.setAttribute("id", "source-video");
       source.setAttribute("type", "video/mp4");

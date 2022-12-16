@@ -14,7 +14,23 @@ function displayModal() {
 
 function closeModal() {
   const modal = document.getElementById("contact_modal");
+  let main = document.getElementById("main-container");
+  main.classList.remove('modal-opened');
   modal.style.display = "none";
+  document.addEventListener("keydown", function (e) {
+    var isTabPressed = e.key === "Tab";
+
+    if (isTabPressed && !e.shiftKey) {
+      if (document.activeElement === lastElement) {
+        return true;
+      }
+    }
+    if (e.shiftKey) {
+      if (isTabPressed) {
+        return true;
+      }
+    }
+  });
 }
 
 function trapFocus(element) {
